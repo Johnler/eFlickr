@@ -1,30 +1,44 @@
 import * as React from 'react';
-import { FlatList, Text, View, StyleSheet } from 'react-native';
+import { FlatList, Text, View, StyleSheet, Dimensions } from 'react-native';
 import { ImageCard } from '../../../../components';
 
 interface CardListProps {
-  data: IData[]
+  data: IData
 }
 
 interface IData {
-  id: string | number;
-  uri?: string;
+  page: number;
+  pages: number;
+  perpage: number;
+  photo: IPhoto[]
+}
+
+interface IPhoto {
+  id: string;
+  title: string;
+  ownername: string;
+  url_m: string;
 }
 
 
 const CardList = (props: CardListProps) => {
+  const { width } = Dimensions.get('screen')
   const { data } = props
+  const {
+    photo
+  } = data
   return (
     <View style={styles.container}>
       <FlatList 
-        data={data}
+        data={photo}
         renderItem={({item}) => <ImageCard 
           style={{
-          width: 400,
+          width: width,
           height: 200
           }} 
-          uri={item.uri}/>
+          uri={item.url_m}/>
         }
+        keyExtractor={item => item.id}
       />
     </View>
   );

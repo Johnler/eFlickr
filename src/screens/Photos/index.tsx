@@ -1,24 +1,46 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, ImageCard } from '../../components'
 import CardList from './components/CardList'
-import { logger } from '../../utils'
-
+import { logger, AxiosGet } from '../../utils'
+import { flickr_url } from '../../utils/flickrAPI'
 
 interface PhotosProps {}
 
-const DATA = [
-  { id:0, uri: undefined},
-  { id:1, uri: undefined},
-  { id:2, uri: undefined},
-  { id:3, uri: undefined},
-]
+
+interface IData {
+  page: number;
+  pages: number;
+  perpage: number;
+  photo: IPhoto[]
+}
+
+interface IPhoto {
+  id: string;
+  title: string;
+  ownername: string;
+  url_m: string;
+}
+
 
 const Photos = (props: PhotosProps) => {
+  const [images, setImages] = useState<IData>({})
+  
+  useEffect(() => {
+    handleImageRequest()
+  }, [])
+
+  const handleImageRequest = async() => {
+    const response = await AxiosGet(flickr_url)
+    //@ts-ignore
+    logger.info("RESPONSE: ", response.data)
+    setImages(response?.data.photos)
+  }
+
   return (
     <View style={styles.container}>
        <CardList 
-        data={DATA}
+        data={images}
        />
     </View>
   );
