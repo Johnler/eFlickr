@@ -33,7 +33,6 @@ const Photos = (props: PhotosProps) => {
   const handleImageRequest = async() => {
     const response = await AxiosGet(flickr_url)
     //@ts-ignore
-    logger.info("RESPONSE: ", response.data)
     setImages(response?.data.photos)
   }
 

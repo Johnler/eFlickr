@@ -2,13 +2,18 @@ import * as React from 'react';
 import { Text as TextRN, StyleSheet, useColorScheme, TextProps } from 'react-native';
 import { logger } from '../../utils';
 
-const Text = (props: TextProps) => {
-    const { children } = props
+interface IText extends TextProps {
+  styles?: any;
+}
+
+const Text = (props: IText) => {
+    const { styles, children } = props
     const isDarkMode = useColorScheme() === 'dark';
 
   return (
       <TextRN 
-        style={isDarkMode ? styles.textDark : styles.textLight}
+      style={StyleSheet.flatten([isDarkMode ? style.textDark : style.textLight, styles])}
+        // style={isDarkMode ? style.textDark : style.textLight}
         >
             {children}
         </TextRN>
@@ -17,7 +22,7 @@ const Text = (props: TextProps) => {
 
 export default Text;
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {},
   textDark: {
     color: '#000000'

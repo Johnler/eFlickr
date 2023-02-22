@@ -36,7 +36,10 @@ const CardList = (props: CardListProps) => {
           width: width,
           height: 200
           }} 
-          uri={item.url_m}/>
+          uri={item.url_m}
+          title={item.title}
+          ownername={item.ownername}
+          />
         }
         keyExtractor={item => item.id}
       />
