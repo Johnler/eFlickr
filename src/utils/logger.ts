@@ -1,11 +1,11 @@
 import {Platform} from 'react-native';
 export const logger = {
-    info: (message: string) => {
+    info: (...message:any) => {
         console.log(`[${Platform.OS}]: `)
-        console.log("%c 🍏 [INFO]:", "color:#b03734", message);
+        console.log("%c 🍏 [INFO]:", "color:#b03734", ...message);
     },
-    error: (message: string) => {
+    error: (...message: any) => {
         console.log(`[${Platform.OS}]: `)
-        console.log("%c 🍅 [ERROR]:", "color:#b03734", message);
+        console.log("%c 🍅 [ERROR]:", "color:#b03734", ...message);
     }
 }

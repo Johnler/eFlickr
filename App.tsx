@@ -31,12 +31,9 @@ const App = () => {
   };
 
   return (
-    // <View>
-    //   <Text>Hellodfd</Text>
       <NavigationContainer>
         <RootNavigation />
       </NavigationContainer>
-      // </View>
   );
 };
 
