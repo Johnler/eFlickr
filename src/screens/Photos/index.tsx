@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, ImageCard } from '../../components'
+import React, { useEffect } from 'react';
+import { View, StyleSheet, Alert } from 'react-native';
 import CardList from './components/CardList'
 import { logger, AxiosGet } from '../../utils'
 import { flickr_url } from '../../utils/flickrAPI'
@@ -15,7 +14,6 @@ import { IPhotosProps, IData } from './types'
 const Photos = (props: IPhotosProps) => {
   const state = useSelector((state:RootState) => state.photo)
   const dispatch = useDispatch()
-  // const [images, setImages] = useState<IData>({})
   
   useEffect(() => {
     if(!state.photos?.photo.length){
@@ -23,13 +21,11 @@ const Photos = (props: IPhotosProps) => {
       handleImageRequest()
       return
     }
-
-    logger.info("USE CACHE PHOTOS")
+      logger.info("USE CACHE PHOTOS")
   }, [])
 
   const handleImageRequest = async() => {
     const response = await AxiosGet(flickr_url)
-    // setImages(response?.data.photos)
     dispatch(actions.setPhoto(response?.data.photos))
   }
 
@@ -38,7 +34,7 @@ const Photos = (props: IPhotosProps) => {
     const response = await AxiosGet(flickr_url)
     if(!response?.data.photos){
       dispatch(actions.setFetch(false))
-      logger.error("NO DATA")
+      Alert.alert('Error', `Network Error`)
       return
     }
     dispatch(actions.setFetch(false))
