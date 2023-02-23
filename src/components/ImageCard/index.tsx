@@ -7,6 +7,7 @@ import { logger } from '../../utils';
 
 import type { RootState } from '../../store';
 import { useSelector, useDispatch } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient';
 
 
 interface ImageCardProps {
@@ -42,6 +43,9 @@ const ImageCard = (props: ImageCardProps) => {
           uri: uri
         }}
       /> */}
+      {/* <LinearGradient 
+          colors={['#00000000', '#990000']} 
+          style={{height : '100%', width : '100%', zIndex: 2}}> */}
       <FastImage 
         style={{...styles.image, ...style}}
         source={{
@@ -51,6 +55,9 @@ const ImageCard = (props: ImageCardProps) => {
         }}
       />
       <View style={styles.textContainer}>
+      <LinearGradient  
+          colors={['#00000000','#00000000', '#00000000', '#000000']} 
+          style={{height : '100%', width : '100%'}}>
       <View style={styles.iconContainer}>
           {(!found_fav && onPressIconFavorite) ? (<Icon 
             onPress={() => onPressIconFavorite({id,url_m: uri,title,ownername})} 
@@ -64,13 +71,15 @@ const ImageCard = (props: ImageCardProps) => {
                 name="star-circle" />) : null
             }
         </View>
+
         <View style={styles.captionContainer}>
           <Text styles={styles.textTitle}>{title}</Text>
           <Text styles={styles.textOwner}>{ownername}</Text>
         </View>
-
+        </LinearGradient>
       </View>
-
+    
+        {/* </LinearGradient> */}
     </View>
   );
 };
@@ -98,7 +107,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
     marginLeft: '2%',
-    marginBottom: '2%'
+    marginBottom: '2%',
   },
   textIcon: {
     color: '#fefefe',
