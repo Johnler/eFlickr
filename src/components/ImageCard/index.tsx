@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet,Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FastImage from 'react-native-fast-image';
 import { Text } from '../'
 import { logger } from '../../utils';
@@ -36,7 +37,8 @@ const ImageCard = (props: ImageCardProps) => {
       />
       <View style={styles.textContainer}>
       <View style={styles.iconContainer}>
-          <Text styles={styles.textIcon}>+</Text>
+          {/* <Text styles={styles.textIcon}>+</Text> */}
+          <Icon style={styles.textIcon} name="star-circle-outline" />
         </View>
         <View style={styles.captionContainer}>
           <Text styles={styles.textTitle}>{title}</Text>
@@ -64,7 +66,8 @@ const styles = StyleSheet.create({
   iconContainer: {
     flex: 1,
     alignItems: 'flex-end',
-    marginRight: '2%'
+    marginRight: '2%',
+    marginTop: '2%'
   },
   captionContainer: {
     flex: 1,
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
   },
   textIcon: {
     color: '#fefefe',
-    fontSize: 50,
+    fontSize: 40,
     flex: 1
   },
   image: {
