@@ -5,14 +5,7 @@ import { logger } from '../../../utils';
 
 interface CardListProps {
   data?: IPhoto[];
-  fetching?: boolean
-}
-
-interface IData {
-  page: number;
-  pages: number;
-  perpage: number;
-  photo?: IPhoto[]
+  onPressIconUnFavorite?: (e?:any) => any;
 }
 
 interface IPhoto {
@@ -26,17 +19,20 @@ interface IPhoto {
 const CardList = (props: CardListProps) => {
   const { width } = Dimensions.get('screen')
   const { 
-    data, 
+    data,
+    onPressIconUnFavorite
    } = props
   return (
     <View style={styles.container}>
       { data?.length ? (<FlatList 
         data={data}
         renderItem={({item}) => <ImageCard 
+          onPressIconUnFavorite={onPressIconUnFavorite}
           style={{
           width: width,
           height: 200
           }} 
+          id={item.id}
           uri={item.url_m}
           title={item.title}
           ownername={item.ownername}

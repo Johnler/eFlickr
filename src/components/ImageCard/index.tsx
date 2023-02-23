@@ -11,7 +11,8 @@ interface ImageCardProps {
   style?: any;
   title?: string;
   ownername?: string;
-  onPressFavorite?: (e?: any) => any;
+  onPressIconFavorite?: (e?: any) => any;
+  onPressIconUnFavorite?: (e?: any) => any;
 }
 
 const ImageCard = (props: ImageCardProps) => {
@@ -21,7 +22,8 @@ const ImageCard = (props: ImageCardProps) => {
     style,
     title,
     ownername,
-    onPressFavorite = () => {},
+    onPressIconFavorite,
+    onPressIconUnFavorite
    } = props;
   return (
     <View style={styles.container}>
@@ -41,11 +43,17 @@ const ImageCard = (props: ImageCardProps) => {
       />
       <View style={styles.textContainer}>
       <View style={styles.iconContainer}>
-          {/* <Text styles={styles.textIcon}>+</Text> */}
-          <Icon 
-            onPress={() => onPressFavorite({id,url_m: uri,title,ownername})} 
+          {onPressIconFavorite ? (<Icon 
+            onPress={() => onPressIconFavorite({id,url_m: uri,title,ownername})} 
             style={styles.textIcon} 
-            name="star-circle-outline" />
+            name="star-circle-outline" />) : null
+            }
+            {
+              onPressIconUnFavorite ? (<Icon 
+                onPress={() => onPressIconUnFavorite({id,url_m: uri,title,ownername})} 
+                style={styles.textIcon} 
+                name="star-circle" />) : null
+            }
         </View>
         <View style={styles.captionContainer}>
           <Text styles={styles.textTitle}>{title}</Text>

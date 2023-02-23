@@ -6,7 +6,7 @@ interface CardListProps {
   data?: IData;
   fetching?: boolean;
   onRefresh: (e?: any) => any;
-  onPressFavorite?: (e?: any) => any;
+  onPressIconFavorite?: (e?: any) => any;
 }
 
 interface IData {
@@ -30,7 +30,7 @@ const CardList = (props: CardListProps) => {
     data, 
     fetching,
     onRefresh = () => {},
-    onPressFavorite = () => {},
+    onPressIconFavorite,
    } = props
   const {
     photo
@@ -42,7 +42,7 @@ const CardList = (props: CardListProps) => {
         onRefresh={() => onRefresh()}
         refreshing={fetching}
         renderItem={({item}) => <ImageCard 
-          onPressFavorite={onPressFavorite}
+        onPressIconFavorite={onPressIconFavorite}
           style={{
           width: width,
           height: 200

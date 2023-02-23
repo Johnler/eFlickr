@@ -53,7 +53,7 @@ const Photos = (props: IPhotosProps) => {
         data={state.photos}
         onRefresh={handlePullRequest}
         fetching={state.fetching}
-        onPressFavorite={handleAddFavorite}
+        onPressIconFavorite={handleAddFavorite}
        />
     </View>
   );

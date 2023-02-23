@@ -3,6 +3,7 @@ import { initialState, unPeristState } from './state'
 import { persistReducer } from 'redux-persist';
 import { getPersistConfig } from 'redux-deep-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { logger } from '../../utils';
 
 //persistent Config
 

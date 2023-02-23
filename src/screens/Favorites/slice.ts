@@ -3,6 +3,7 @@ import { initialState, unPeristState } from './state'
 import { persistReducer } from 'redux-persist';
 import { getPersistConfig } from 'redux-deep-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { logger } from '../../utils';
 
 //persistent Config
 
@@ -17,6 +18,9 @@ export const slice = createSlice({
             }
             state.fav_photos = [...state.fav_photos, actions.payload]
         },
+        removeFavorite: (state, actions) => {
+            state.fav_photos = state.fav_photos?.filter(data =>  data.id !== actions.payload.id)
+        }
     }
 })
 const persistHomeSliceConfig = getPersistConfig({
