@@ -19,7 +19,8 @@ export const slice = createSlice({
             state.fav_photos = [...state.fav_photos, actions.payload]
         },
         removeFavorite: (state, actions) => {
-            state.fav_photos = state.fav_photos?.filter(data =>  data.id !== actions.payload.id)
+            const new_photos = state.fav_photos?.filter(data =>  data.id !== actions.payload.id)
+            state.fav_photos = new_photos
         }
     }
 })

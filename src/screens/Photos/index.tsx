@@ -47,6 +47,10 @@ const Photos = (props: IPhotosProps) => {
     dispatch(favActions.addFavorite(data))
   }
 
+  const onPressIconUnFavorite = (data:IPhoto) => {
+    dispatch(favActions.removeFavorite(data))
+  }
+
   return (
     <View style={styles.container}>
        <CardList 
@@ -54,6 +58,7 @@ const Photos = (props: IPhotosProps) => {
         onRefresh={handlePullRequest}
         fetching={state.fetching}
         onPressIconFavorite={handleAddFavorite}
+        onPressIconUnFavorite={onPressIconUnFavorite}
        />
     </View>
   );

@@ -5,6 +5,10 @@ import FastImage from 'react-native-fast-image';
 import { Text } from '../'
 import { logger } from '../../utils';
 
+import type { RootState } from '../../store';
+import { useSelector, useDispatch } from 'react-redux'
+
+
 interface ImageCardProps {
   id?: string;
   uri?: string;
@@ -16,6 +20,7 @@ interface ImageCardProps {
 }
 
 const ImageCard = (props: ImageCardProps) => {
+  const fav_state = useSelector((state:RootState) => state.favorite)
   const { 
     id,
     uri = "https://unsplash.it/400/400?image=1",
@@ -25,6 +30,10 @@ const ImageCard = (props: ImageCardProps) => {
     onPressIconFavorite,
     onPressIconUnFavorite
    } = props;
+
+
+   const found_fav = fav_state.fav_photos?.some(data => data.id === id)
+
   return (
     <View style={styles.container}>
       {/* <Image 
@@ -43,13 +52,13 @@ const ImageCard = (props: ImageCardProps) => {
       />
       <View style={styles.textContainer}>
       <View style={styles.iconContainer}>
-          {onPressIconFavorite ? (<Icon 
+          {(!found_fav && onPressIconFavorite) ? (<Icon 
             onPress={() => onPressIconFavorite({id,url_m: uri,title,ownername})} 
             style={styles.textIcon} 
             name="star-circle-outline" />) : null
             }
             {
-              onPressIconUnFavorite ? (<Icon 
+              (found_fav && onPressIconUnFavorite) ? (<Icon 
                 onPress={() => onPressIconUnFavorite({id,url_m: uri,title,ownername})} 
                 style={styles.textIcon} 
                 name="star-circle" />) : null
