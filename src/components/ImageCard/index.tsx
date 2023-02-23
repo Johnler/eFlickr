@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet,  } from 'react-native';
+import { View, StyleSheet,Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Text } from '../'
 import { logger } from '../../utils';
@@ -20,12 +20,10 @@ const ImageCard = (props: ImageCardProps) => {
    } = props;
   return (
     <View style={styles.container}>
-      <FastImage 
+      <Image 
         style={{...styles.image, ...style}}
         source={{
-          uri: uri,
-          priority: FastImage.priority.normal,
-          cache: FastImage.cacheControl.cacheOnly
+          uri: uri
         }}
       />
       <View style={styles.textContainer}>

@@ -3,7 +3,7 @@ import { FlatList, Text, View, StyleSheet, Dimensions } from 'react-native';
 import { ImageCard } from '../../../../components';
 
 interface CardListProps {
-  data: IData
+  data?: IData
 }
 
 interface IData {

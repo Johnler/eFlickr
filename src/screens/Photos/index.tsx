@@ -14,25 +14,29 @@ import { IPhotosProps, IData } from './types'
 
 const Photos = (props: IPhotosProps) => {
   const state = useSelector((state:RootState) => state.photo)
-  logger.info(state)
   const dispatch = useDispatch()
-  const [images, setImages] = useState<IData>({})
+  // const [images, setImages] = useState<IData>({})
   
   useEffect(() => {
-    handleImageRequest()
+    if(!state.photos?.photo.length){
+      logger.info("REQUEST PHOTOS")
+      handleImageRequest()
+      return
+    }
+
+    logger.info("USE CACHE PHOTOS")
   }, [])
 
   const handleImageRequest = async() => {
     const response = await AxiosGet(flickr_url)
-    //@ts-ignore
-    setImages(response?.data.photos)
+    // setImages(response?.data.photos)
     dispatch(actions.setPhoto(response?.data.photos))
   }
 
   return (
     <View style={styles.container}>
        <CardList 
-        data={images}
+        data={state.photos}
        />
     </View>
   );
