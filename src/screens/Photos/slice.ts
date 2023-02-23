@@ -12,6 +12,9 @@ export const slice = createSlice({
     reducers: {
         setPhoto: (state,actions) => {
             state.photos = actions.payload
+        },
+        setFetch: (state, actions) => {
+            state.fetching = actions.payload
         }
     }
 })

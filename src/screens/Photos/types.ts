@@ -1,6 +1,7 @@
 export interface IState {
     screen? : string;
-    photos?: IData
+    photos?: IData;
+    fetching?: boolean;
 }
 
 export interface IPhotosProps {}

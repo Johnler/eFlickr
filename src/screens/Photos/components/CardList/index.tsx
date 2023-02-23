@@ -3,7 +3,9 @@ import { FlatList, Text, View, StyleSheet, Dimensions } from 'react-native';
 import { ImageCard } from '../../../../components';
 
 interface CardListProps {
-  data?: IData
+  data?: IData;
+  fetching?: boolean
+  onRefresh: (e?: any) => any;
 }
 
 interface IData {
@@ -23,7 +25,11 @@ interface IPhoto {
 
 const CardList = (props: CardListProps) => {
   const { width } = Dimensions.get('screen')
-  const { data } = props
+  const { 
+    data, 
+    fetching,
+    onRefresh = () => {},
+   } = props
   const {
     photo
   } = data
@@ -31,6 +37,8 @@ const CardList = (props: CardListProps) => {
     <View style={styles.container}>
       <FlatList 
         data={photo}
+        onRefresh={() => onRefresh()}
+        refreshing={fetching}
         renderItem={({item}) => <ImageCard 
           style={{
           width: width,

@@ -33,10 +33,24 @@ const Photos = (props: IPhotosProps) => {
     dispatch(actions.setPhoto(response?.data.photos))
   }
 
+  const handlePullRequest = async() => {
+    dispatch(actions.setFetch(true));
+    const response = await AxiosGet(flickr_url)
+    if(!response?.data.photos){
+      dispatch(actions.setFetch(false))
+      logger.error("NO DATA")
+      return
+    }
+    dispatch(actions.setFetch(false))
+    dispatch(actions.setPhoto(response?.data.photos))
+  }
+
   return (
     <View style={styles.container}>
        <CardList 
         data={state.photos}
+        onRefresh={handlePullRequest}
+        fetching={state.fetching}
        />
     </View>
   );
