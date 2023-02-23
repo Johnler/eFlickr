@@ -7,12 +7,14 @@ import { flickr_url } from '../../utils/flickrAPI'
 import type { RootState } from '../../store';
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from './slice';
+import { actions as favActions } from '../Favorites/slice'
 
-import { IPhotosProps, IData } from './types'
+import { IPhotosProps, IPhoto } from './types'
 
 
 const Photos = (props: IPhotosProps) => {
   const state = useSelector((state:RootState) => state.photo)
+  const fav_state = useSelector((state:RootState) => state.favorite)
   const dispatch = useDispatch()
   
   useEffect(() => {
@@ -41,12 +43,17 @@ const Photos = (props: IPhotosProps) => {
     dispatch(actions.setPhoto(response?.data.photos))
   }
 
+  const handleAddFavorite = (data: IPhoto) => {
+    dispatch(favActions.addFavorite(data))
+  }
+
   return (
     <View style={styles.container}>
        <CardList 
         data={state.photos}
         onRefresh={handlePullRequest}
         fetching={state.fetching}
+        onPressFavorite={handleAddFavorite}
        />
     </View>
   );

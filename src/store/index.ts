@@ -8,10 +8,12 @@ import {
   PURGE,
   REGISTER, } from 'redux-persist';
 import photoSlice from '../screens/Photos/slice'
+import favoriteSlice from '../screens/Favorites/slice'
 
 export const store = configureStore({
   reducer: {
     photo: photoSlice,
+    favorite: favoriteSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

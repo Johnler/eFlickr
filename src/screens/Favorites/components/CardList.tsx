@@ -1,19 +1,18 @@
 import * as React from 'react';
 import { FlatList, Text, View, StyleSheet, Dimensions } from 'react-native';
-import { ImageCard } from '../../../../components';
+import { ImageCard } from '../../../components/';
+import { logger } from '../../../utils';
 
 interface CardListProps {
-  data?: IData;
-  fetching?: boolean;
-  onRefresh: (e?: any) => any;
-  onPressFavorite?: (e?: any) => any;
+  data?: IPhoto[];
+  fetching?: boolean
 }
 
 interface IData {
   page: number;
   pages: number;
   perpage: number;
-  photo: IPhoto[]
+  photo?: IPhoto[]
 }
 
 interface IPhoto {
@@ -28,33 +27,23 @@ const CardList = (props: CardListProps) => {
   const { width } = Dimensions.get('screen')
   const { 
     data, 
-    fetching,
-    onRefresh = () => {},
-    onPressFavorite = () => {},
    } = props
-  const {
-    photo
-  } = data
   return (
     <View style={styles.container}>
-      <FlatList 
-        data={photo}
-        onRefresh={() => onRefresh()}
-        refreshing={fetching}
+      { data?.length ? (<FlatList 
+        data={data}
         renderItem={({item}) => <ImageCard 
-          onPressFavorite={onPressFavorite}
           style={{
           width: width,
           height: 200
           }} 
-          id={item.id}
           uri={item.url_m}
           title={item.title}
           ownername={item.ownername}
           />
         }
         keyExtractor={item => item.id}
-      />
+      />) : (null)}
     </View>
   );
 };

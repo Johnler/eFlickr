@@ -6,18 +6,22 @@ import { Text } from '../'
 import { logger } from '../../utils';
 
 interface ImageCardProps {
+  id?: string;
   uri?: string;
   style?: any;
   title?: string;
   ownername?: string;
+  onPressFavorite?: (e?: any) => any;
 }
 
 const ImageCard = (props: ImageCardProps) => {
   const { 
+    id,
     uri = "https://unsplash.it/400/400?image=1",
     style,
     title,
-    ownername
+    ownername,
+    onPressFavorite = () => {},
    } = props;
   return (
     <View style={styles.container}>
@@ -38,7 +42,10 @@ const ImageCard = (props: ImageCardProps) => {
       <View style={styles.textContainer}>
       <View style={styles.iconContainer}>
           {/* <Text styles={styles.textIcon}>+</Text> */}
-          <Icon style={styles.textIcon} name="star-circle-outline" />
+          <Icon 
+            onPress={() => onPressFavorite({id,url_m: uri,title,ownername})} 
+            style={styles.textIcon} 
+            name="star-circle-outline" />
         </View>
         <View style={styles.captionContainer}>
           <Text styles={styles.textTitle}>{title}</Text>
