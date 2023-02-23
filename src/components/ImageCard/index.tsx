@@ -20,10 +20,18 @@ const ImageCard = (props: ImageCardProps) => {
    } = props;
   return (
     <View style={styles.container}>
-      <Image 
+      {/* <Image 
         style={{...styles.image, ...style}}
         source={{
           uri: uri
+        }}
+      /> */}
+      <FastImage 
+        style={{...styles.image, ...style}}
+        source={{
+          uri: uri,
+          priority: FastImage.priority.normal,
+          cache: FastImage.cacheControl.immutable
         }}
       />
       <View style={styles.textContainer}>
