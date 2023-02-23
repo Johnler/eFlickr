@@ -25,6 +25,7 @@ const ImageCard = (props: ImageCardProps) => {
         source={{
           uri: uri,
           priority: FastImage.priority.normal,
+          cache: FastImage.cacheControl.cacheOnly
         }}
       />
       <View style={styles.textContainer}>

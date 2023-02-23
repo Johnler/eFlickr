@@ -10,11 +10,13 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
   useColorScheme,
-  Text,
-  View
 } from 'react-native';
+
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import { store, persistor } from './src/store';
+
 
 import {NavigationContainer} from '@react-navigation/native';
 import RootNavigation from './src/navigations/RootNavigation';
@@ -31,9 +33,13 @@ const App = () => {
   };
 
   return (
-      <NavigationContainer>
-        <RootNavigation />
-      </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <RootNavigation />
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 };
 

@@ -5,25 +5,17 @@ import CardList from './components/CardList'
 import { logger, AxiosGet } from '../../utils'
 import { flickr_url } from '../../utils/flickrAPI'
 
-interface PhotosProps {}
+import type { RootState } from '../../store';
+import { useSelector, useDispatch } from 'react-redux'
+import { actions } from './slice';
+
+import { IPhotosProps, IData } from './types'
 
 
-interface IData {
-  page: number;
-  pages: number;
-  perpage: number;
-  photo: IPhoto[]
-}
-
-interface IPhoto {
-  id: string;
-  title: string;
-  ownername: string;
-  url_m: string;
-}
-
-
-const Photos = (props: PhotosProps) => {
+const Photos = (props: IPhotosProps) => {
+  const state = useSelector((state:RootState) => state.photo)
+  logger.info(state)
+  const dispatch = useDispatch()
   const [images, setImages] = useState<IData>({})
   
   useEffect(() => {
@@ -34,6 +26,7 @@ const Photos = (props: PhotosProps) => {
     const response = await AxiosGet(flickr_url)
     //@ts-ignore
     setImages(response?.data.photos)
+    dispatch(actions.setPhoto(response?.data.photos))
   }
 
   return (
