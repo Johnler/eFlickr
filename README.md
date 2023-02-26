@@ -6,6 +6,20 @@
 ## Updates/Commits
 [https://github.com/Johnler/eFlickr/commits/main](https://github.com/Johnler/eFlickr/commits/main)
 
+
+## Setup
+### Android:
+    1. git clone https://github.com/Johnler/eFlickr
+    2. npm install
+    3. npm run android
+
+### iOS: (Mac M1)
+    1. git clone https://github.com/Johnler/eFlickr
+    2. npm install
+    3. cd ios/
+    4. arch -x86_64 pod install
+    5. cd ../
+    6 npm run ios 
 ## Technology
     - ReactJS (v18.1.0)
     - ReactNative (v0.70.6)
